@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32328.378
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoreApi", "StoreApi\StoreApi.csproj", "{B6718E2E-3D3E-49C9-92CC-90CDEFD2C5C5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoreApi.Models", "StoreApi.Models\StoreApi.Models.csproj", "{D50E3A83-C59A-4890-A0E9-2A26AE0DF1E0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B6718E2E-3D3E-49C9-92CC-90CDEFD2C5C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6718E2E-3D3E-49C9-92CC-90CDEFD2C5C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6718E2E-3D3E-49C9-92CC-90CDEFD2C5C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6718E2E-3D3E-49C9-92CC-90CDEFD2C5C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D50E3A83-C59A-4890-A0E9-2A26AE0DF1E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D50E3A83-C59A-4890-A0E9-2A26AE0DF1E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D50E3A83-C59A-4890-A0E9-2A26AE0DF1E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D50E3A83-C59A-4890-A0E9-2A26AE0DF1E0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CBD992A8-8221-4743-AD65-B11249C60C82}
+	EndGlobalSection
+EndGlobal
