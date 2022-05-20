@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,8 +9,16 @@ namespace StoreApi.Models.ApiModels.Request
 {
     public class Product
     {
+        [Required]
+        [StringLength(maximumLength: 200, ErrorMessage = "El campo {0} no debe contener más de {1} carácteres.")]
         public string Name { get; set; }
+        [Required]
+        [StringLength(maximumLength: 200, ErrorMessage = "El campo {0} no debe contener más de {1} carácteres.")]
         public string Description { get; set; }
-        public string SKU { get; set; }
+
+        [Required]
+        [StringLength(maximumLength: 200, ErrorMessage = "El campo {0} no debe contener más de {1} carácteres.")]
+        public string Category { get; set; }
+
     }
 }

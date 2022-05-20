@@ -1,4 +1,12 @@
+using StoreApi.BLL;
+using StoreApi.DAL;
+
 var builder = WebApplication.CreateBuilder(args);
+
+
+builder.Services.AddScoped<IProductActions, ProductActions>();
+builder.Services.AddScoped<IProduct, Product>();
+
 
 // Add services to the container.
 
