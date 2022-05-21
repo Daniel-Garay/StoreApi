@@ -4,11 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using StoreApi.Models;
+using StoreApi.Models.ApiModels.Request;
 
 namespace StoreApi.BLL
 {
     public interface IProductActions
     {
-        public Task<List<StoreApi.Models.ApiModels.Request.Product>> GetCatalog();
+        public List<StoreApi.Models.ApiModels.Response.Product> GetCatalog(FilterCatalog filterCatalog);
+        public StoreApi.Models.ApiModels.Response.Product CreateProduct(StoreApi.Models.ApiModels.Request.Product product);
     }
 }

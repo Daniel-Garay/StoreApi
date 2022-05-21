@@ -7,6 +7,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddScoped<IProductActions, ProductActions>();
 builder.Services.AddScoped<IProduct, Product>();
 
+builder.Services.AddScoped<ILoggerActions, LoggerActions>();
+builder.Services.AddScoped<StoreApi.DAL.ILogger, Logger>();
+
 
 // Add services to the container.
 

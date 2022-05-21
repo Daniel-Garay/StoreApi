@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using StoreApi.DAL;
+using StoreApi.Models.ApiModels.Request;
 
 namespace StoreApi.BLL
 {
@@ -14,9 +15,14 @@ namespace StoreApi.BLL
         {
             _product = product;
         }
-        public async Task<List<Models.ApiModels.Request.Product>> GetCatalog()
+        public List<Models.ApiModels.Response.Product> GetCatalog(FilterCatalog filterCatalog)
         {
-            return await _product.GetCatalog();
+            return _product.GetCatalog(filterCatalog);
+        }
+
+        public StoreApi.Models.ApiModels.Response.Product CreateProduct(StoreApi.Models.ApiModels.Request.Product product)
+        {
+           return _product.CreateProduct(product);
         }
     }
 }

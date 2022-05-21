@@ -21,4 +21,12 @@ namespace StoreApi.Models.ApiModels.Request
         public string Category { get; set; }
 
     }
+
+    public enum OrderByProduct
+    {
+        category_desc,
+        category_asc,
+        name_desc,
+        name_asc,
+    }
 }
