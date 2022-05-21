@@ -20,9 +20,14 @@ namespace StoreApi.BLL
             return _product.GetCatalog(filterCatalog);
         }
 
-        public StoreApi.Models.ApiModels.Response.Product CreateProduct(StoreApi.Models.ApiModels.Request.Product product)
+        public StoreApi.Models.ApiModels.Response.Product CreateProduct(StoreApi.Models.ApiModels.Request.ProductCreate product)
         {
-           return _product.CreateProduct(product);
+            return _product.CreateProduct(product);
+        }
+
+        public StoreApi.Models.ApiModels.Response.Product UpdateProduct(StoreApi.Models.ApiModels.Request.ProductUpdate product, int productId)
+        {
+            return _product.UpdateProduct(product,productId);
         }
     }
 }

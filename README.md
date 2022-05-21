@@ -102,13 +102,44 @@ Producto Creado
     "name": "iPhone negro ",
     "description": "Celular iPhone negro",
     "category": "Aple",
-    "creationDate": "0001-01-01T00:00:00"
+    "creationDate": "2022-05-20T23:50:38.397"
+
+```
+###  Actualizacipon de producto:
+
+Verbo Http : POST
+Url : https://localhost:7206/UpdateProduct
+
+
+Request UpdateProduct
+
+```json
+{
+  "name": "iPhone",
+  "description": "Celular iPhone",
+  "Category": "Aple"
+}
+```
+
+
+
+Response Status: 200 OK
+
+Producto Actualizado
+```json
+
+{
+    "id": 142,
+    "name": "iPhone negro ",
+    "description": "Celular iPhone negro",
+    "category": "Aple",
+    "creationDate": "2022-05-20T23:50:38.397"
 }
 
 ```
 
-
 #### Tecnología Utilizada
 - .Net Core
 -  ApiRest
--  Dynamo DB
+-  SQL Server
+-  Swagger

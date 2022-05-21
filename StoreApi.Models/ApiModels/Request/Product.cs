@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace StoreApi.Models.ApiModels.Request
 {
-    public class Product
+    public class ProductCreate
     {
         [Required]
         [StringLength(maximumLength: 200, ErrorMessage = "El campo {0} no debe contener más de {1} carácteres.")]
@@ -19,6 +19,19 @@ namespace StoreApi.Models.ApiModels.Request
         [Required]
         [StringLength(maximumLength: 200, ErrorMessage = "El campo {0} no debe contener más de {1} carácteres.")]
         public string Category { get; set; }
+
+    }
+
+    public class ProductUpdate
+    {
+        [StringLength(maximumLength: 200, ErrorMessage = "El campo {0} no debe contener más de {1} carácteres.")]
+        public string? Name { get; set; }
+
+        [StringLength(maximumLength: 200, ErrorMessage = "El campo {0} no debe contener más de {1} carácteres.")]
+        public string? Description { get; set; }
+
+        [StringLength(maximumLength: 200, ErrorMessage = "El campo {0} no debe contener más de {1} carácteres.")]
+        public string? Category { get; set; }
 
     }
 

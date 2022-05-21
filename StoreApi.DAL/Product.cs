@@ -49,7 +49,7 @@ namespace StoreApi.DAL
 
             }
         }
-        public StoreApi.Models.ApiModels.Response.Product CreateProduct(StoreApi.Models.ApiModels.Request.Product product)
+        public StoreApi.Models.ApiModels.Response.Product CreateProduct(StoreApi.Models.ApiModels.Request.ProductCreate product)
         {
             Models.Product productAdd = new Models.Product()
             {
@@ -71,6 +71,41 @@ namespace StoreApi.DAL
                 Category = product.Category,
                 Description = product.Description,
                 Name = product.Name,
+                CreationDate = DateTime.UtcNow,
+            };
+
+        }
+        public StoreApi.Models.ApiModels.Response.Product UpdateProduct(StoreApi.Models.ApiModels.Request.ProductUpdate product, int productId)
+        {
+            Models.Product productUpdate = new Models.Product();
+            Models.Product productActual = new Models.Product();
+
+            using (var context = new StoreContext())
+            {
+                productActual = context.Products.FirstOrDefault(item => item.Id == productId);
+
+            }
+
+            using (var context = new StoreContext())
+            {
+                productUpdate.Id = productId;
+                productUpdate.Category = (product?.Category != null) ? product.Category : productActual.Category;
+                productUpdate.Description = (product?.Description != null) ? product.Description : productActual.Description;
+                productUpdate.Name = (product?.Name != null) ? product.Name : productActual.Name;
+                productUpdate.CreationDate = productActual.CreationDate;
+
+
+                context.Products.Update(productUpdate);
+                context.SaveChanges();
+            }
+
+            return new StoreApi.Models.ApiModels.Response.Product
+            {
+                Id = productUpdate.Id,
+                Category = productUpdate.Category,
+                Description = productUpdate.Description,
+                Name = productUpdate.Name,
+                CreationDate = productUpdate.CreationDate,
             };
 
         }

@@ -3,7 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using StoreApi.BLL;
 using StoreApi.Models.ApiModels.Request;
 using StoreApi.Models.ApiModels.Response;
-using Product = StoreApi.Models.ApiModels.Request.Product;
+using Product = StoreApi.Models.ApiModels.Request.ProductCreate;
+using ProductUpdate = StoreApi.Models.ApiModels.Request.ProductUpdate;
 
 namespace StoreApi.Controllers
 {
@@ -23,7 +24,7 @@ namespace StoreApi.Controllers
 
         [Route("CreateProduct")]
         [HttpPost]
-        public IActionResult CreateProduct([FromBody] Product product)
+        public IActionResult CreateProduct([FromBody] ProductCreate product)
         {
             try
             {
@@ -35,6 +36,36 @@ namespace StoreApi.Controllers
                 Error error = new Error()
                 {
                     EndPoint = "CreateProduct",
+                    ErrorCode = 500,
+                    Message = e.Message,
+                    Reference = Guid.NewGuid().ToString(),
+                    Body = Newtonsoft.Json.JsonConvert.SerializeObject(product),
+                    QueryParameters = null,
+                };
+                _loggerActions.CreateLogger(error);
+                return StatusCode(500, new
+                {
+                    error.ErrorCode,
+                    error.Message,
+                    error.Reference
+                });
+            }
+        }
+
+        [Route("UpdateProduct")]
+        [HttpPut]
+        public IActionResult UpdateProduct([FromBody] ProductUpdate product,[FromQuery] int productId)
+        {
+            try
+            {
+                var productCreated = _productActions.UpdateProduct(product, productId);
+                return Ok(productCreated);
+            }
+            catch (Exception e)
+            {
+                Error error = new Error()
+                {
+                    EndPoint = "UpdateProduct",
                     ErrorCode = 500,
                     Message = e.Message,
                     Reference = Guid.NewGuid().ToString(),

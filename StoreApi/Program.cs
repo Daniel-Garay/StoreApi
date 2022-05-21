@@ -1,15 +1,20 @@
 using StoreApi.BLL;
 using StoreApi.DAL;
+//using StoreApi.DAL.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
 
 builder.Services.AddScoped<IProductActions, ProductActions>();
-builder.Services.AddScoped<IProduct, Product>();
+builder.Services.AddScoped<IProduct, StoreApi.DAL.Product>();
 
 builder.Services.AddScoped<ILoggerActions, LoggerActions>();
 builder.Services.AddScoped<StoreApi.DAL.ILogger, Logger>();
 
+/*
+var mySqlConnectionConfig = new StoreContext();
+builder.Services.AddScoped<mySqlConnectionConfig>();
+*/
 
 // Add services to the container.
 
