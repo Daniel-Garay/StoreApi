@@ -10,7 +10,7 @@ namespace StoreApi.DAL
 {
     public class Logger : ILogger
     {
-        public void CreateLogger(Error error)
+        public void CreateLogger(StoreApi.Models.InternalUse.Error error)
         {
             Models.ApiLog apiLogAdd = new Models.ApiLog()
             {

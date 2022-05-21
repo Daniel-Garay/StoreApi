@@ -15,7 +15,7 @@ namespace StoreApi.BLL
         {
             _logger = logger;
         }
-        public void CreateLogger(Error error)
+        public void CreateLogger(Models.InternalUse.Error error)
         {
             _logger.CreateLogger(error);
         }

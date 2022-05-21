@@ -8,6 +8,6 @@ namespace StoreApi.BLL
 {
     public interface ILoggerActions
     {
-        public void CreateLogger(StoreApi.Models.ApiModels.Response.Error error);
+        public void CreateLogger(Models.InternalUse.Error error);
     }
 }

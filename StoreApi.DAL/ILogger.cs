@@ -8,6 +8,6 @@ namespace StoreApi.DAL
 {
     public interface ILogger
     {
-        public void CreateLogger(StoreApi.Models.ApiModels.Response.Error error);
+        public void CreateLogger(StoreApi.Models.InternalUse.Error error);
     }
 }

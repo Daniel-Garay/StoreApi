@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using StoreApi.BLL;
 using StoreApi.Models.ApiModels.Request;
 using StoreApi.Models.ApiModels.Response;
+using Swashbuckle.AspNetCore.Annotations;
 using Product = StoreApi.Models.ApiModels.Request.ProductCreate;
 using ProductUpdate = StoreApi.Models.ApiModels.Request.ProductUpdate;
 
@@ -15,14 +16,28 @@ namespace StoreApi.Controllers
         private readonly IProductActions _productActions;
         private readonly ILoggerActions _loggerActions;
 
-
         public ProductApiController(IProductActions productActions, ILoggerActions loggerActions)
         {
             _productActions = productActions ?? throw new ArgumentNullException(nameof(productActions));
             _loggerActions = loggerActions ?? throw new ArgumentNullException(nameof(loggerActions));
         }
 
+        /// <summary>
+        /// Método para obtener el catalogo
+        /// </summary>
+        /// <param name="filterCatalog"></param>
+        /// <returns></returns>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     GET /GetCatalog
+        /// </remarks>
+        /// <response code="200">Returna una lista de productos páginada</response>
+        /// <response code="500">Ocurrio un error interno</response>
+        [SwaggerResponse(200, "Lista de productos", typeof(StoreApi.Models.ApiModels.Response.Product[]))]
+        [SwaggerResponse(500, "Error interno", typeof(Models.ApiModels.Response.Error))]
         [Route("GetCatalog")]
+        [Produces("application/json")]
         [HttpGet]
         public IActionResult GetCatalog([FromQuery] FilterCatalog filterCatalog)
         {
@@ -33,7 +48,7 @@ namespace StoreApi.Controllers
             }
             catch (Exception e)
             {
-                Error error = new Error()
+                Models.InternalUse.Error error = new Models.InternalUse.Error()
                 {
                     EndPoint = "GetCatalog",
                     ErrorCode = 500,
@@ -43,15 +58,34 @@ namespace StoreApi.Controllers
                     QueryParameters = Newtonsoft.Json.JsonConvert.SerializeObject(filterCatalog),
                 };
                 _loggerActions.CreateLogger(error);
-                return StatusCode(500, new
+                return StatusCode(500, new Models.ApiModels.Response.Error
                 {
-                    error.ErrorCode,
-                    error.Message,
-                    error.Reference
+                    ErrorCode = error.ErrorCode,
+                    Message = error.Message,
+                    Reference = error.Reference
                 });
             }
         }
 
+        /// <summary>
+        ///   Método para crear producto  
+        /// </summary>
+        /// <param name="product"></param>
+        /// <returns></returns>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     POST /CreateProduct
+        ///     {
+        ///        "name": "iPhone negro create",
+        ///        "description": "Celular iPhone negro más negro",
+        ///        "category": "Apple"
+        ///     }
+        /// </remarks>
+        /// <response code="200">Retorna que el producto se creo correctamente</response>
+        /// <response code="500">Ocurrio un error interno</response>
+        [SwaggerResponse(200, "Producto creado", typeof(StoreApi.Models.ApiModels.Response.Product))]
+        [SwaggerResponse(500, "Error interno", typeof(Models.ApiModels.Response.Error))]
         [Route("CreateProduct")]
         [HttpPost]
         public IActionResult CreateProduct([FromBody] ProductCreate product)
@@ -63,7 +97,7 @@ namespace StoreApi.Controllers
             }
             catch (Exception e)
             {
-                Error error = new Error()
+                Models.InternalUse.Error error = new Models.InternalUse.Error()
                 {
                     EndPoint = "CreateProduct",
                     ErrorCode = 500,
@@ -73,18 +107,39 @@ namespace StoreApi.Controllers
                     QueryParameters = null,
                 };
                 _loggerActions.CreateLogger(error);
-                return StatusCode(500, new
+                return StatusCode(500, new Models.ApiModels.Response.Error
                 {
-                    error.ErrorCode,
-                    error.Message,
-                    error.Reference
+                    ErrorCode = error.ErrorCode,
+                    Message = error.Message,
+                    Reference = error.Reference
                 });
             }
         }
 
+
+        /// <summary>
+        ///  Método para actualizar producto    
+        /// </summary>
+        /// <param name="product"></param>
+        /// <param name="productId"></param>
+        /// <returns></returns>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     PUT /UpdateProduct
+        ///     {
+        ///        "name": "iPhone negro update",
+        ///        "description": "Celular iPhone negro más negro",
+        ///        "category": "Apple"
+        ///     }
+        /// </remarks>
+        /// <response code="200">Retorna que el producto se actualizo correctamente</response>
+        /// <response code="500">Ocurrio un error interno</response>
+        [SwaggerResponse(200, "Producto actualizado", typeof(StoreApi.Models.ApiModels.Response.Product))]
+        [SwaggerResponse(500, "Error interno", typeof(Models.ApiModels.Response.Error))]
         [Route("UpdateProduct")]
         [HttpPut]
-        public IActionResult UpdateProduct([FromBody] ProductUpdate product,[FromQuery] int productId)
+        public IActionResult UpdateProduct([FromBody] ProductUpdate product, [FromQuery] int productId)
         {
             try
             {
@@ -93,7 +148,7 @@ namespace StoreApi.Controllers
             }
             catch (Exception e)
             {
-                Error error = new Error()
+                Models.InternalUse.Error error = new Models.InternalUse.Error()
                 {
                     EndPoint = "UpdateProduct",
                     ErrorCode = 500,
@@ -103,15 +158,30 @@ namespace StoreApi.Controllers
                     QueryParameters = null,
                 };
                 _loggerActions.CreateLogger(error);
-                return StatusCode(500, new
+                return StatusCode(500, new Models.ApiModels.Response.Error
                 {
-                    error.ErrorCode,
-                    error.Message,
-                    error.Reference
+                    ErrorCode = error.ErrorCode,
+                    Message = error.Message,
+                    Reference = error.Reference
                 });
             }
         }
 
+
+        /// <summary>
+        ///  Método para borrar producto
+        /// </summary>
+        /// <param name="productId"></param>
+        /// <returns></returns>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     DELETE /DeleteProduct
+        /// </remarks>
+        /// <response code="200">Retorna que el producto se borro correctamente</response>
+        /// <response code="500">Ocurrio un error interno</response>
+        [SwaggerResponse(200, "Producto borrado", typeof(StoreApi.Models.ApiModels.Response.ResultOperation))]
+        [SwaggerResponse(500, "Error interno", typeof(Models.ApiModels.Response.Error))]
         [Route("DeleteProduct")]
         [HttpDelete]
         public IActionResult DeleteProduct([FromQuery] int productId)
@@ -119,14 +189,14 @@ namespace StoreApi.Controllers
             try
             {
                 var deleted = _productActions.DeleteProduct(productId);
-                if(deleted)
-                return Ok(new { Message = "El producto se borro correctamente" , Status=deleted });
+                if (deleted)
+                    return Ok(new ResultOperation { Message = "se borro correctamente", Status = deleted });
 
-                return Ok(new { Message = "El producto no se borro correctamente" , Status=deleted });
+                return Ok(new { Message = "El producto no se borro correctamente", Status = deleted });
             }
             catch (Exception e)
             {
-                Error error = new Error()
+                Models.InternalUse.Error error = new Models.InternalUse.Error()
                 {
                     EndPoint = "UpdateProduct",
                     ErrorCode = 500,
@@ -136,11 +206,11 @@ namespace StoreApi.Controllers
                     QueryParameters = Newtonsoft.Json.JsonConvert.SerializeObject(productId),
                 };
                 _loggerActions.CreateLogger(error);
-                return StatusCode(500, new
+                return StatusCode(500, new Models.ApiModels.Response.Error
                 {
-                    error.ErrorCode,
-                    error.Message,
-                    error.Reference
+                    ErrorCode = error.ErrorCode,
+                    Message = error.Message,
+                    Reference = error.Reference
                 });
             }
         }

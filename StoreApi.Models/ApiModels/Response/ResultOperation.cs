@@ -6,11 +6,9 @@ using System.Threading.Tasks;
 
 namespace StoreApi.Models.ApiModels.Response
 {
-    public class Error
+    public class ResultOperation
     {
         public string Message { get; set; }
-        public string Reference { get; set; }
-        public int ErrorCode { get; set; }
-        
+        public bool Status { get; set; }
     }
 }
