@@ -4,10 +4,10 @@
 
 
 ## Existe un catálogo de productos que cuenta con las siguientes características:
-• Nombre
-• Descripción breve
-• Categoría
-• Imagen del producto
+- Nombre
+- Descripción breve
+- Categoría
+- Imagen del producto
 
 ## Desarrolle una API Restful que permita:
 1. Crear un nuevo producto
@@ -15,9 +15,9 @@
 3. Borrar un producto existente
 4. Listar los productos existentes teniendo en cuenta que se puede buscar por:
 
-• Nombre
-• Descripción.
-• Categoría
+- Nombre
+- Descripción.
+- Categoría
 
 Es necesario que se puedan ordenar los resultados de forma ascendente o
 descendente ya sea por nombre o por categoría.
@@ -94,7 +94,7 @@ Request CreateProduct
 
 Response Status: 200 OK
 
-Lista de productos
+Producto Creado
 ```json
 
 {
