@@ -8,8 +8,15 @@ using System.Threading.Tasks;
 
 namespace StoreApi.DAL
 {
+    /// <summary>
+    /// Implementación de la interface ILogger en DAL
+    /// </summary>
     public class Logger : ILogger
     {
+        /// <summary>
+        /// Método para crear un Log en Base de datos
+        /// </summary>
+        /// <param name="error"></param>
         public void CreateLogger(StoreApi.Models.InternalUse.Error error)
         {
             Models.ApiLog apiLogAdd = new Models.ApiLog()

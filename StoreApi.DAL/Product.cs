@@ -8,8 +8,16 @@ using System.Threading.Tasks;
 
 namespace StoreApi.DAL
 {
+    /// <summary>
+    /// Implementación de la interface IProduct en DAL
+    /// </summary>
     public class Product : IProduct
     {
+        /// <summary>
+        /// Método para consultar un listado de productos en Base de datos
+        /// </summary>
+        /// <param name="filterCatalog"></param>
+        /// <returns></returns>
         public List<StoreApi.Models.ApiModels.Response.Product> GetCatalog(FilterCatalog filterCatalog)
         {
             List<StoreApi.Models.ApiModels.Response.Product> ProductList = new List<StoreApi.Models.ApiModels.Response.Product>();
@@ -49,6 +57,11 @@ namespace StoreApi.DAL
 
             }
         }
+        /// <summary>
+        /// Método para crear un producto en BD
+        /// </summary>
+        /// <param name="product"></param>
+        /// <returns></returns>
         public StoreApi.Models.ApiModels.Response.Product CreateProduct(StoreApi.Models.ApiModels.Request.ProductCreate product)
         {
             Models.Product productAdd = new Models.Product()
@@ -75,6 +88,11 @@ namespace StoreApi.DAL
             };
 
         }
+        /// <summary>
+        /// Método para borrar un producto en BD
+        /// </summary>
+        /// <param name="productId"></param>
+        /// <returns></returns>
         public bool DeleteProduct(int productId)
         {
 
@@ -86,6 +104,12 @@ namespace StoreApi.DAL
             }
             return true;
         }
+        /// <summary>
+        /// Método para actualizar un producto en BD
+        /// </summary>
+        /// <param name="product"></param>
+        /// <param name="productId"></param>
+        /// <returns></returns>
         public StoreApi.Models.ApiModels.Response.Product UpdateProduct(StoreApi.Models.ApiModels.Request.ProductUpdate product, int productId)
         {
             Models.Product productUpdate = new Models.Product();

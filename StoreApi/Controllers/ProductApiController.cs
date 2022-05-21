@@ -9,13 +9,27 @@ using ProductUpdate = StoreApi.Models.ApiModels.Request.ProductUpdate;
 
 namespace StoreApi.Controllers
 {
+    /// <summary>
+    /// Controlador para el manejo de productos
+    /// </summary>
     [ApiController]
     public class ProductApiController : ControllerBase
     {
-
+        /// <summary>
+        /// Interface para acceder a los métodos expuestos para productos
+        /// </summary>
         private readonly IProductActions _productActions;
+        /// <summary>
+        /// Interface para acceder a los métodos expuestos para logger
+        /// </summary>
         private readonly ILoggerActions _loggerActions;
 
+        /// <summary>
+        /// Construnctor para inyectar dependencia de productos y logger
+        /// </summary>
+        /// <param name="productActions"></param>
+        /// <param name="loggerActions"></param>
+        /// <exception cref="ArgumentNullException"></exception>
         public ProductApiController(IProductActions productActions, ILoggerActions loggerActions)
         {
             _productActions = productActions ?? throw new ArgumentNullException(nameof(productActions));
