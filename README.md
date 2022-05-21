@@ -22,9 +22,9 @@
 Es necesario que se puedan ordenar los resultados de forma ascendente o
 descendente ya sea por nombre o por categoría.
 
-## Tenga en cuenta que el catálogo de productos puede crecer, hasta llegar a tener más de 100 mil registros.
+Tenga en cuenta que el catálogo de productos puede crecer, hasta llegar a tener más de 100 mil registros.
 
-Tenga en cuenta los siguientes requerimientos técnicos:
+## Tenga en cuenta los siguientes requerimientos técnicos:
 
 - Lenguaje C# (net framework 4.7+)
 - La base de datos debe ser SQL server 2014+
