@@ -37,6 +37,76 @@ Tenga en cuenta los siguientes requerimientos técnicos:
 archivo ZIP.
 
 
+# Entregable
+
+###  Consulta de catalogo:
+
+Verbo Http : GET
+Url : https://localhost:7206/GetCatalog
+Query Parameters : 
+                    *  orderByProduct => Enumerable => category_desc, category_asc,  name_desc,  name_asc,
+                    *  description
+                    *  category
+                    *  from
+                    *  name
+                    *  maxPageSize
+
+Response Status: 200 OK
+
+Lista de productos
+```json
+[
+    {
+        "id": 132,
+        "name": "Airpods",
+        "description": "AirPods con estuche de carga - Blanco",
+        "category": "Aple",
+        "creationDate": "2022-05-20T21:37:29.15"
+    },
+    {
+        "id": 133,
+        "name": "Mac",
+        "description": "Computadora Mac",
+        "category": "Aple",
+        "creationDate": "2022-05-20T23:50:38.397"
+    }
+]
+```
+
+###  Creación de producto:
+
+Verbo Http : POST
+Url : https://localhost:7206/CreateProduct
+
+
+Request CreateProduct
+
+```json
+{
+  "name": "iPhone",
+  "description": "Celular iPhone",
+  "Category": "Aple"
+}
+```
+
+
+
+Response Status: 200 OK
+
+Lista de productos
+```json
+
+{
+    "id": 142,
+    "name": "iPhone negro ",
+    "description": "Celular iPhone negro",
+    "category": "Aple",
+    "creationDate": "0001-01-01T00:00:00"
+}
+
+```
+
+
 #### Tecnología Utilizada
 - .Net Core
 -  ApiRest
