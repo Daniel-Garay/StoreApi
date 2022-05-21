@@ -26,14 +26,14 @@ descendente ya sea por nombre o por categoría.
 
 Tenga en cuenta los siguientes requerimientos técnicos:
 
-• Lenguaje C# (net framework 4.7+)
-• La base de datos debe ser SQL server 2014+
-• Usar Entity Framework como ORM
-• Deben reflejarse los principios RestFul en el API
-• Usar una arquitectura claramente definida (3 capas / dominio).
-• Debe usarse inyección de dependencias.
-• Debe existir evidencia del manejo de errores.
-• Entregar el código fuente en un repositorio de Git (público), o en su defecto, un
+- Lenguaje C# (net framework 4.7+)
+- La base de datos debe ser SQL server 2014+
+- Usar Entity Framework como ORM
+- Deben reflejarse los principios RestFul en el API
+- Usar una arquitectura claramente definida (3 capas / dominio).
+- Debe usarse inyección de dependencias.
+- Debe existir evidencia del manejo de errores.
+- Entregar el código fuente en un repositorio de Git (público), o en su defecto, un
 archivo ZIP.
 
 
@@ -43,13 +43,14 @@ archivo ZIP.
 
 Verbo Http : GET
 Url : https://localhost:7206/GetCatalog
-Query Parameters : 
-                    *  orderByProduct => Enumerable => category_desc, category_asc,  name_desc,  name_asc,
-                    *  description
-                    *  category
-                    *  from
-                    *  name
-                    *  maxPageSize
+####  Query Parameters:
+  
+                    -  orderByProduct => Enumerable => category_desc, category_asc,  name_desc,  name_asc,
+                    -  description
+                    -  category
+                    -  from
+                    -  name
+                    -  maxPageSize
 
 Response Status: 200 OK
 
