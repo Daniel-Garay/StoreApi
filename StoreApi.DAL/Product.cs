@@ -75,6 +75,17 @@ namespace StoreApi.DAL
             };
 
         }
+        public bool DeleteProduct(int productId)
+        {
+
+            using (var context = new StoreContext())
+            {
+                Models.Product product = (Models.Product)context.Products.Where(b => b.Id == productId).First();
+                context.Products.Remove(product);
+                context.SaveChanges();
+            }
+            return true;
+        }
         public StoreApi.Models.ApiModels.Response.Product UpdateProduct(StoreApi.Models.ApiModels.Request.ProductUpdate product, int productId)
         {
             Models.Product productUpdate = new Models.Product();

@@ -29,5 +29,10 @@ namespace StoreApi.BLL
         {
             return _product.UpdateProduct(product,productId);
         }
+
+        public bool DeleteProduct(int productId)
+        {
+            return _product.DeleteProduct(productId);
+        }
     }
 }

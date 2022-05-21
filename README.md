@@ -105,9 +105,9 @@ Producto Creado
     "creationDate": "2022-05-20T23:50:38.397"
 
 ```
-###  Actualizacipon de producto:
+###  Actualizar un  producto:
 
-Verbo Http : POST
+Verbo Http : PUT
 Url : https://localhost:7206/UpdateProduct
 
 
@@ -137,6 +137,27 @@ Producto Actualizado
 }
 
 ```
+###  Eliminar un producto:
+
+Verbo Http : DELETE
+Url : https://localhost:7206/DeleteProduct
+
+
+####  Query Parameters:
+  
+                    -  productId
+
+Response Status: 200 OK
+
+Producto eliminado correctamente
+```json
+{
+    "message": "El producto se borro correctamente",
+    "status": true
+}
+
+```
+
 
 #### Tecnología Utilizada
 - .Net Core

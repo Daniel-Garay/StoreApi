@@ -22,6 +22,36 @@ namespace StoreApi.Controllers
             _loggerActions = loggerActions ?? throw new ArgumentNullException(nameof(loggerActions));
         }
 
+        [Route("GetCatalog")]
+        [HttpGet]
+        public IActionResult GetCatalog([FromQuery] FilterCatalog filterCatalog)
+        {
+            try
+            {
+                List<StoreApi.Models.ApiModels.Response.Product> ProductList = _productActions.GetCatalog(filterCatalog);
+                return Ok(ProductList);
+            }
+            catch (Exception e)
+            {
+                Error error = new Error()
+                {
+                    EndPoint = "GetCatalog",
+                    ErrorCode = 500,
+                    Message = e.Message,
+                    Reference = Guid.NewGuid().ToString(),
+                    Body = null,
+                    QueryParameters = Newtonsoft.Json.JsonConvert.SerializeObject(filterCatalog),
+                };
+                _loggerActions.CreateLogger(error);
+                return StatusCode(500, new
+                {
+                    error.ErrorCode,
+                    error.Message,
+                    error.Reference
+                });
+            }
+        }
+
         [Route("CreateProduct")]
         [HttpPost]
         public IActionResult CreateProduct([FromBody] ProductCreate product)
@@ -82,25 +112,28 @@ namespace StoreApi.Controllers
             }
         }
 
-        [Route("GetCatalog")]
-        [HttpGet]
-        public IActionResult GetCatalog([FromQuery] FilterCatalog filterCatalog)
+        [Route("DeleteProduct")]
+        [HttpDelete]
+        public IActionResult DeleteProduct([FromQuery] int productId)
         {
             try
             {
-                List<StoreApi.Models.ApiModels.Response.Product> ProductList = _productActions.GetCatalog(filterCatalog);
-                return Ok(ProductList);
+                var deleted = _productActions.DeleteProduct(productId);
+                if(deleted)
+                return Ok(new { Message = "El producto se borro correctamente" , Status=deleted });
+
+                return Ok(new { Message = "El producto no se borro correctamente" , Status=deleted });
             }
             catch (Exception e)
             {
                 Error error = new Error()
                 {
-                    EndPoint = "GetCatalog",
+                    EndPoint = "UpdateProduct",
                     ErrorCode = 500,
                     Message = e.Message,
                     Reference = Guid.NewGuid().ToString(),
                     Body = null,
-                    QueryParameters = Newtonsoft.Json.JsonConvert.SerializeObject(filterCatalog),
+                    QueryParameters = Newtonsoft.Json.JsonConvert.SerializeObject(productId),
                 };
                 _loggerActions.CreateLogger(error);
                 return StatusCode(500, new
@@ -111,5 +144,6 @@ namespace StoreApi.Controllers
                 });
             }
         }
+
     }
 }
