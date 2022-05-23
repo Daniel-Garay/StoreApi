@@ -20,8 +20,7 @@ namespace StoreApi.DAL
         /// <returns></returns>
         public List<StoreApi.Models.ApiModels.Response.Product> GetCatalog(FilterCatalog filterCatalog)
         {
-            List<StoreApi.Models.ApiModels.Response.Product> ProductList = new List<StoreApi.Models.ApiModels.Response.Product>();
-
+            
             var filterAction = (Models.Product product) =>
             {
                 return
@@ -39,6 +38,7 @@ namespace StoreApi.DAL
                     Description = product.Description,
                     Category = product.Category,
                     Name = product.Name,
+                    Base64File = (product?.Base64File == null) ? null : Convert.ToBase64String(product.Base64File), 
                 };
             };
 
@@ -69,6 +69,7 @@ namespace StoreApi.DAL
                 Category = product.Category,
                 Description = product.Description,
                 Name = product.Name,
+                Base64File = Convert.FromBase64String(product.Base64File),
             };
 
             using (var context = new StoreContext())
@@ -112,35 +113,29 @@ namespace StoreApi.DAL
         /// <returns></returns>
         public StoreApi.Models.ApiModels.Response.Product UpdateProduct(StoreApi.Models.ApiModels.Request.ProductUpdate product, int productId)
         {
-            Models.Product productUpdate = new Models.Product();
             Models.Product productActual = new Models.Product();
 
             using (var context = new StoreContext())
             {
                 productActual = context.Products.FirstOrDefault(item => item.Id == productId);
-
-            }
-
-            using (var context = new StoreContext())
-            {
-                productUpdate.Id = productId;
-                productUpdate.Category = (product?.Category != null) ? product.Category : productActual.Category;
-                productUpdate.Description = (product?.Description != null) ? product.Description : productActual.Description;
-                productUpdate.Name = (product?.Name != null) ? product.Name : productActual.Name;
-                productUpdate.CreationDate = productActual.CreationDate;
+                productActual.Category = (product?.Category != null) ? product.Category : productActual.Category;
+                productActual.Description = (product?.Description != null) ? product.Description : productActual.Description;
+                productActual.Name = (product?.Name != null) ? product.Name : productActual.Name;
+                productActual.CreationDate = productActual.CreationDate;
+                productActual.Base64File = (product?.Base64File != null) ? Convert.FromBase64String(product.Base64File) : productActual.Base64File;
 
 
-                context.Products.Update(productUpdate);
+                context.Products.Update(productActual);
                 context.SaveChanges();
             }
 
             return new StoreApi.Models.ApiModels.Response.Product
             {
-                Id = productUpdate.Id,
-                Category = productUpdate.Category,
-                Description = productUpdate.Description,
-                Name = productUpdate.Name,
-                CreationDate = productUpdate.CreationDate,
+                Id = productActual.Id,
+                Category = productActual.Category,
+                Description = productActual.Description,
+                Name = productActual.Name,
+                CreationDate = productActual.CreationDate,
             };
 
         }

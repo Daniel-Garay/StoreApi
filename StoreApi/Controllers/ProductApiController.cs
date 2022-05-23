@@ -105,7 +105,7 @@ namespace StoreApi.Controllers
         public IActionResult CreateProduct([FromBody] ProductCreate product)
         {
             try
-            {
+            {                
                 var productCreated = _productActions.CreateProduct(product);
                 return Ok(productCreated);
             }

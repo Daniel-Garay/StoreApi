@@ -10,8 +10,8 @@ namespace StoreApi.Test.BLL
 {
     public class ProductActionTest
     {
-       /* private readonly IProductActions _productActions;
-        List<Models.ApiModels.Request.Product> ProductList = new List<Models.ApiModels.Request.Product>();
+        private readonly IProductActions _productActions;
+        List<Models.ApiModels.Response.Product> ProductList = new List<Models.ApiModels.Response.Product>();
 
         public ProductActionTest()
         {
@@ -20,24 +20,24 @@ namespace StoreApi.Test.BLL
                 Category = "Computer",
                 Name = "Computador XP",
                 Description = "Computador para uso Personal"
-            };
-
-            Models.ApiModels.Response.FilterCatalog request = new Models.ApiModels.Response.FilterCatalog();
-
+            };           
             ProductList.Add(product);
 
+            Models.ApiModels.Request.FilterCatalog request = new Models.ApiModels.Request.FilterCatalog();
+
+
             var productMock = new Mock<IProduct>();
-            productMock.Setup(p => p.GetCatalog(request)).Returns(Task.FromResult(ProductList));
+            productMock.Setup(p => p.GetCatalog(request)).Returns(ProductList);
             _productActions = new ProductActions(productMock.Object);
         }
 
         [Fact]
         public void GetCatalog()
         {
-            Models.ApiModels.Response.FilterCatalog request = new Models.ApiModels.Response.FilterCatalog();
-            var actualProductList = _productActions.GetCatalog(request).Result;
+            Models.ApiModels.Request.FilterCatalog request = new Models.ApiModels.Request.FilterCatalog();
+            var actualProductList = _productActions.GetCatalog(request);
             Assert.Equal(ProductList, actualProductList);
         }
-       */
+       
     }
 }

@@ -13,6 +13,7 @@ namespace StoreApi.Models.ApiModels.Response
         public string Description { get; set; } = null!;
         public string Category { get; set; } = null!;
         public DateTime CreationDate { get; set; }
+        public string? Base64File { get; set; }
 
     }
 }

@@ -20,6 +20,9 @@ namespace StoreApi.Models.ApiModels.Request
         [StringLength(maximumLength: 200, ErrorMessage = "El campo {0} no debe contener más de {1} carácteres.")]
         public string Category { get; set; }
 
+        [Required]
+        public string Base64File { get; set; }
+
     }
 
     public class ProductUpdate
@@ -32,6 +35,9 @@ namespace StoreApi.Models.ApiModels.Request
 
         [StringLength(maximumLength: 200, ErrorMessage = "El campo {0} no debe contener más de {1} carácteres.")]
         public string? Category { get; set; }
+
+        public string? Base64File { get; set; }
+
 
     }
 
