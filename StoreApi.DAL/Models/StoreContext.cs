@@ -2,13 +2,17 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.Extensions.Configuration;
 
 namespace StoreApi.DAL.Models
 {
     public partial class StoreContext : DbContext
     {
-        public StoreContext()
+
+        private readonly IConfiguration _config;
+        public StoreContext(IConfiguration config)
         {
+            _config = config;
         }
 
         public StoreContext(DbContextOptions<StoreContext> options)
@@ -23,8 +27,7 @@ namespace StoreApi.DAL.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Server=DESKTOP-01TMK3G;Database=Store;User=developer;Password=123456789");
+                optionsBuilder.UseSqlServer(_config.GetConnectionString("SqlConnection"));
             }
         }
 

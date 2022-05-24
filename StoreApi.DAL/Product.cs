@@ -1,4 +1,5 @@
-﻿using StoreApi.DAL.Models;
+﻿using Microsoft.Extensions.Configuration;
+using StoreApi.DAL.Models;
 using StoreApi.Models.ApiModels.Request;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,13 @@ namespace StoreApi.DAL
     /// </summary>
     public class Product : IProduct
     {
+
+        private readonly IConfiguration _config;
+
+        public Product(IConfiguration config)
+        {
+            _config = config;
+        }
         /// <summary>
         /// Método para consultar un listado de productos en Base de datos
         /// </summary>
@@ -20,7 +28,7 @@ namespace StoreApi.DAL
         /// <returns></returns>
         public List<StoreApi.Models.ApiModels.Response.Product> GetCatalog(FilterCatalog filterCatalog)
         {
-            
+
             var filterAction = (Models.Product product) =>
             {
                 return
@@ -38,11 +46,11 @@ namespace StoreApi.DAL
                     Description = product.Description,
                     Category = product.Category,
                     Name = product.Name,
-                    Base64File = (product?.Base64File == null) ? null : Convert.ToBase64String(product.Base64File), 
+                    Base64File = (product?.Base64File == null) ? null : Convert.ToBase64String(product.Base64File),
                 };
             };
 
-            using (var context = new StoreContext())
+            using (var context = new StoreContext(_config))
             {
 
                 var orderedProducts = filterCatalog.orderByProduct switch
@@ -72,7 +80,7 @@ namespace StoreApi.DAL
                 Base64File = Convert.FromBase64String(product.Base64File),
             };
 
-            using (var context = new StoreContext())
+            using (var context = new StoreContext(_config))
             {
 
                 context.Products.Add(productAdd);
@@ -97,7 +105,7 @@ namespace StoreApi.DAL
         public bool DeleteProduct(int productId)
         {
 
-            using (var context = new StoreContext())
+            using (var context = new StoreContext(_config))
             {
                 Models.Product product = (Models.Product)context.Products.Where(b => b.Id == productId).First();
                 context.Products.Remove(product);
@@ -115,7 +123,7 @@ namespace StoreApi.DAL
         {
             Models.Product productActual = new Models.Product();
 
-            using (var context = new StoreContext())
+            using (var context = new StoreContext(_config))
             {
                 productActual = context.Products.FirstOrDefault(item => item.Id == productId);
                 productActual.Category = (product?.Category != null) ? product.Category : productActual.Category;

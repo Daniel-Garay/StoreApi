@@ -1,4 +1,5 @@
-﻿using StoreApi.DAL.Models;
+﻿using Microsoft.Extensions.Configuration;
+using StoreApi.DAL.Models;
 using StoreApi.Models.ApiModels.Response;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,14 @@ namespace StoreApi.DAL
     /// </summary>
     public class Logger : ILogger
     {
+
+        private readonly IConfiguration _config;
+
+        public Logger(IConfiguration config)
+        {
+            _config = config;
+        }
+
         /// <summary>
         /// Método para crear un Log en Base de datos
         /// </summary>
@@ -28,7 +37,7 @@ namespace StoreApi.DAL
                 QueryParameters = error.QueryParameters,
             };
 
-            using (var context = new StoreContext())
+            using (var context = new StoreContext(_config))
             {
 
                 context.ApiLogs.Add(apiLogAdd);
