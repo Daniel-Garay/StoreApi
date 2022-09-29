@@ -8,6 +8,11 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 	</PropertyGroup>
 
+	<ItemGroup Condition="'$(Configuration)'=='qa'">
+		<Content Remove="appsettings.qa.json;appsettings.qa.json" />
+		<None Include="appsettings.qa.json;appsettings.qa.json" />
+	</ItemGroup>
+
 	<ItemGroup>
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
