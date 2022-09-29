@@ -1,4 +1,4 @@
-# Prueba de ingreso Aranda Software
+# Prueba de ingreso Aranda Software 1.0
 
 ![enter image description here](https://i.postimg.cc/906RHhfH/logo-Aranda.png)
 
